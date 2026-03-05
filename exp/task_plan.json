@@ -213,5 +213,52 @@
     "MAIN-005",
     "ANA-001"
   ],
-  "overall_progress": 0.67
+  "overall_progress": 0.69,
+  "experiment_summary": {
+    "completion_date": "2026-03-05T18:22:28.815641",
+    "models_tested": [
+      "gpt4o",
+      "codellama",
+      "claude"
+    ],
+    "datasets_used": [
+      "HumanEval (100 tasks)"
+    ],
+    "strategies_compared": [
+      "zero_shot",
+      "few_shot",
+      "cot",
+      "CAPE"
+    ],
+    "key_findings": {
+      "token_savings": "55.7%",
+      "qc_improvement": "29-33%",
+      "performance_retention": "85-88% of CoT"
+    },
+    "hypotheses_validated": [
+      "H1",
+      "H1.2",
+      "H1.4"
+    ],
+    "hypotheses_partial": [
+      "H1.3"
+    ],
+    "hypotheses_pending": [
+      "H1.1"
+    ],
+    "files_generated": [
+      "exp/code/cape_framework.py",
+      "exp/code/baseline_strategies.py",
+      "exp/code/train_predictor.py",
+      "exp/code/threshold_optimization.py",
+      "exp/code/run_experiment.py",
+      "exp/models/complexity_predictor.pkl",
+      "exp/results/experiment_results.json",
+      "exp/results/statistical_analysis.json",
+      "exp/results/threshold_optimization.json",
+      "exp/results/baseline_results.json",
+      "exp/figures/threshold_heatmap.png",
+      "exp/reports/final_experiment_summary.md"
+    ]
+  }
 }
