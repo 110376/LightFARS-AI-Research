@@ -1,376 +1,423 @@
 {
-  "research_title": "基于任务复杂度的自适应 Prompt 工程框架用于高效代码生成",
-  "research_acronym": "CAPE",
-  "version": "1.0",
-  "created_date": "2026-01-15",
-  "research_objectives": {
-    "primary": "开发一个基于任务复杂度的自适应 Prompt 工程框架，在保持代码生成质量的同时显著降低计算成本",
-    "secondary": [
-      "建立代码任务复杂度与最优 Prompt 策略之间的形式化映射关系",
-      "验证动态自适应机制相比静态策略选择的优势",
-      "评估框架在不同模型家族间的泛化能力",
-      "提供可量化的成本 - 质量权衡决策依据"
-    ]
-  },
-  "research_hypotheses": {
-    "H1": {
-      "statement": "存在一个最优的 Prompt 策略选择函数 f: C → S，能够最大化质量 - 成本比 Q/C",
-      "formalization": "max_f E_{c~C}[Q(f(c), c) / Cost(f(c), c)]",
-      "testable": true
-    },
-    "H1_1": {
-      "statement": "代码任务复杂度可通过多维度特征有效预测",
-      "features": [
-        "结构复杂度",
-        "语义复杂度",
-        "依赖复杂度",
-        "文本复杂度"
-      ],
-      "testable": true
-    },
-    "H1_2": {
-      "statement": "存在复杂度阈值 T₁ 和 T₂，使得不同策略在不同区间内 Q/C 最优",
-      "thresholds": {
-        "zero_shot_range": "complexity < T₁",
-        "few_shot_range": "T₁ ≤ complexity < T₂",
-        "cot_range": "complexity ≥ T₂"
-      },
-      "testable": true
-    },
-    "H1_3": {
-      "statement": "引入动态调整机制可进一步提升 Q/C 比 15% 以上",
-      "expected_improvement": 0.15,
-      "testable": true
-    },
-    "H1_4": {
-      "statement": "最优阈值在不同模型家族间存在系统性差异，但特征重要性排序具有跨模型一致性",
-      "testable": true
-    }
-  },
-  "methodology": {
-    "approach": "混合研究方法（定量实验 + 定性分析）",
-    "phases": [
-      {
-        "phase_id": 1,
-        "name": "复杂度特征工程",
-        "duration_months": 2,
-        "tasks": [
-          "收集 5000+ 代码生成任务",
-          "提取多维度复杂度特征",
-          "构建复杂度标注数据集",
-          "进行特征相关性分析"
-        ],
-        "deliverables": [
-          "复杂度特征数据集",
-          "特征工程报告"
-        ],
-        "datasets": [
-          "HumanEval",
-          "MBPP",
-          "LeetCode-Hard",
-          "自建复杂任务集"
-        ]
-      },
-      {
-        "phase_id": 2,
-        "name": "策略性能基准测试",
-        "duration_months": 2,
-        "tasks": [
-          "在 3 类模型上测试 3 种 Prompt 策略",
-          "收集质量指标（pass@1, pass@10）",
-          "记录 token 消耗量",
-          "计算 Q/C 比值"
-        ],
-        "deliverables": [
-          "策略性能对比报告",
-          "统计显著性分析"
-        ],
-        "models": [
-          "GPT-4o",
-          "CodeLlama-34B",
-          "Claude-3.5"
-        ],
-        "strategies": [
-          "Zero-shot",
-          "Few-shot (5 示例)",
-          "CoT (结构化)"
-        ]
-      },
-      {
-        "phase_id": 3,
-        "name": "自适应模型训练",
-        "duration_months": 2,
-        "tasks": [
-          "训练复杂度预测器（XGBoost）",
-          "通过贝叶斯优化搜索最优阈值 T₁, T₂",
-          "开发动态调整器",
-          "集成 CAPE 原型系统"
-        ],
-        "deliverables": [
-          "CAPE 原型系统",
-          "模型训练日志"
-        ],
-        "algorithms": [
-          "XGBoost",
-          "贝叶斯优化",
-          "自一致性评分"
-        ]
-      },
-      {
-        "phase_id": 4,
-        "name": "跨模型泛化验证",
-        "duration_months": 2,
-        "tasks": [
-          "在额外 5 个模型上验证 CAPE 框架",
-          "分析阈值迁移规律",
-          "建立模型规模与最优阈值映射关系",
-          "撰写研究论文"
-        ],
-        "deliverables": [
-          "泛化性分析报告",
-          "研究论文初稿"
-        ],
-        "additional_models": [
-          "GPT-3.5-turbo",
-          "Llama-3-70B",
-          "Mistral-Large",
-          "Gemini-Pro",
-          "StarCoder2"
-        ]
-      },
-      {
-        "phase_id": 5,
-        "name": "工具包开源与文档完善",
-        "duration_months": 1,
-        "tasks": [
-          "完善 CAPE 工具包代码",
-          "编写技术文档和使用指南",
-          "发布 GitHub 仓库",
-          "准备会议/期刊投稿"
-        ],
-        "deliverables": [
-          "GitHub 仓库",
-          "技术文档",
-          "Prompt 选择指南"
-        ]
-      }
-    ]
-  },
-  "evaluation_metrics": {
-    "quality_metrics": [
-      {
-        "name": "pass@1",
-        "description": "一次生成即通过所有测试用例的概率",
-        "target": "不低于静态 CoT 策略的 95%"
-      },
-      {
-        "name": "pass@10",
-        "description": "10 次生成中至少一次通过的概率",
-        "target": "不低于静态 CoT 策略的 90%"
-      },
-      {
-        "name": "code_executability",
-        "description": "生成代码可执行的比例",
-        "target": "> 85%"
-      },
-      {
-        "name": "maintainability_score",
-        "description": "代码可维护性评分（基于圈复杂度等）",
-        "target": "不低于基线的 90%"
-      }
-    ],
-    "cost_metrics": [
-      {
-        "name": "total_tokens",
-        "description": "输入 + 输出 token 总数",
-        "target": "相比静态 CoT 减少 40-60%"
-      },
-      {
-        "name": "qc_ratio",
-        "description": "质量 - 成本比值（pass@1 / total_tokens）",
-        "target": "相比最优静态策略提升 30% 以上"
-      },
-      {
-        "name": "inference_latency",
-        "description": "平均推理延迟（毫秒）",
-        "target": "不显著增加（< 10%）"
-      }
-    ],
-    "statistical_tests": [
-      {
-        "test": "paired t-test",
-        "alpha": 0.05,
-        "purpose": "检验 CAPE 与基线方法的性能差异显著性"
-      },
-      {
-        "test": "Cohen's d",
-        "purpose": "计算效应量"
-      },
-      {
-        "test": "5-fold cross-validation",
-        "purpose": "评估模型泛化能力"
-      }
-    ]
-  },
-  "baseline_methods": [
+  "project_title": "Prompt工程策略对代码生成质量与效率的影响研究",
+  "research_questions": [
     {
-      "name": "Static-CoT",
-      "description": "统一使用 CoT 策略",
-      "reference": "Wei et al. (2022)"
+      "id": "RQ1",
+      "question": "不同Prompt策略（Zero-shot、Few-shot、Chain-of-Thought）在代码生成任务上的性能差异如何？",
+      "sub_questions": [
+        {
+          "id": "SQ1.1",
+          "question": "CoT提示在复杂算法任务上的优势是否显著高于简单任务？",
+          "metrics": [
+            "代码正确性",
+            "响应时间",
+            "token消耗"
+          ]
+        },
+        {
+          "id": "SQ1.2",
+          "question": "Few-shot提示的最优示例数量是否存在？",
+          "metrics": [
+            "性能-成本比",
+            "边际收益递减点"
+          ]
+        }
+      ]
     },
     {
-      "name": "Static-FewShot",
-      "description": "统一使用 Few-shot 策略",
-      "reference": "标准实践"
+      "id": "RQ2",
+      "question": "任务复杂度如何调节Prompt策略的有效性？",
+      "sub_questions": [
+        {
+          "id": "SQ2.1",
+          "question": "不同编程领域（算法、数据处理、系统编程）对Prompt策略的敏感性是否不同？",
+          "metrics": [
+            "领域特异性得分",
+            "策略敏感性指数"
+          ]
+        }
+      ]
     },
     {
-      "name": "PET-Select",
-      "description": "基于代码复杂度的二分类策略选择",
-      "reference": "Wang et al. (2024)",
-      "arxiv": "2409.16416"
+      "id": "RQ3",
+      "question": "不同Prompt策略的计算成本与性能提升之间的权衡关系如何？",
+      "sub_questions": [
+        {
+          "id": "SQ3.1",
+          "question": "Prompt策略的计算成本主要来自哪些因素？",
+          "metrics": [
+            "上下文长度成本",
+            "推理步骤成本",
+            "内存使用成本"
+          ]
+        }
+      ]
     },
     {
-      "name": "RoutingGen",
-      "description": "难度感知动态路由框架",
-      "reference": "Li et al. (2025)",
-      "arxiv": "2512.14048"
+      "id": "RQ4",
+      "question": "如何基于任务特性和资源约束选择最优的Prompt策略？",
+      "sub_questions": [
+        {
+          "id": "SQ4.1",
+          "question": "能否开发一个决策模型来推荐最优Prompt策略？",
+          "metrics": [
+            "决策准确率",
+            "用户满意度",
+            "成本节约率"
+          ]
+        }
+      ]
     }
   ],
-  "expected_outcomes": {
-    "theoretical_contributions": [
-      "复杂度 - 策略映射理论",
-      "动态自适应框架",
-      "成本效益量化模型"
-    ],
-    "practical_contributions": [
-      "CAPE 开源工具包",
-      "Prompt 选择最佳实践指南",
-      "成本优化方案（预期节省 40-60% token）"
-    ],
-    "publications": [
-      {
-        "type": "conference",
-        "target_venues": [
-          "ICSE",
-          "FSE",
-          "ASE",
-          "NeurIPS",
-          "ICLR"
+  "hypotheses": [
+    {
+      "id": "H1",
+      "name": "任务复杂度调节假设",
+      "description": "Chain-of-Thought提示在复杂算法任务上的优势与任务复杂度呈正相关，但在简单任务上可能产生负向效应",
+      "testable_predictions": [
+        {
+          "id": "H1a",
+          "prediction": "对于复杂度评分>0.7的算法任务，CoT提示比Zero-shot提示在代码正确性上提升至少30%",
+          "test_method": "ANOVA with post-hoc tests",
+          "significance_level": 0.05
+        },
+        {
+          "id": "H1b",
+          "prediction": "对于复杂度评分<0.3的简单任务，CoT提示可能降低生成效率（响应时间增加20%以上）",
+          "test_method": "t-test with effect size calculation",
+          "significance_level": 0.05
+        }
+      ]
+    },
+    {
+      "id": "H2",
+      "name": "计算效率边界假设",
+      "description": "Few-shot提示存在一个最优示例数量，超过该数量后性能提升边际递减，而计算成本线性增长",
+      "testable_predictions": [
+        {
+          "id": "H2a",
+          "prediction": "Few-shot提示在3-5个示例时达到最优性能-成本比",
+          "test_method": "Curve fitting and optimization",
+          "significance_level": 0.05
+        }
+      ]
+    },
+    {
+      "id": "H3",
+      "name": "领域特异性假设",
+      "description": "不同编程领域（Web开发、数据科学、系统编程）对Prompt策略的敏感性不同",
+      "testable_predictions": [
+        {
+          "id": "H3a",
+          "prediction": "数据处理任务对Few-shot提示最敏感，算法任务对CoT提示最敏感",
+          "test_method": "MANOVA with interaction effects",
+          "significance_level": 0.05
+        }
+      ]
+    }
+  ],
+  "experimental_design": {
+    "factors": {
+      "prompt_strategy": {
+        "levels": [
+          "zero_shot",
+          "few_shot",
+          "chain_of_thought"
         ],
-        "timeline": "第 8-9 月投稿"
+        "description": "不同类型的Prompt工程策略"
       },
-      {
-        "type": "journal",
-        "target_venues": [
-          "TSE",
-          "TOSEM",
-          "JMLR"
+      "task_type": {
+        "levels": [
+          "algorithm",
+          "data_processing",
+          "system_programming",
+          "web_development"
         ],
-        "timeline": "第 10-12 月投稿"
+        "description": "不同编程领域的任务类型"
+      },
+      "task_complexity": {
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "description": "任务复杂度等级"
       }
-    ],
-    "open_source": {
-      "platform": "GitHub",
-      "license": "MIT",
-      "components": [
-        "CAPE 核心库",
-        "复杂度预测模型",
-        "基准测试脚本",
-        "文档"
+    },
+    "dependent_variables": {
+      "performance": {
+        "code_correctness": {
+          "measure": "测试用例通过率",
+          "scale": "0-100%"
+        },
+        "code_quality": {
+          "measure": "专家评分（1-5分）",
+          "dimensions": [
+            "可读性",
+            "可维护性",
+            "效率"
+          ]
+        }
+      },
+      "efficiency": {
+        "response_time": {
+          "measure": "毫秒",
+          "description": "从输入到输出的时间"
+        },
+        "computational_cost": {
+          "measure": "token数量",
+          "description": "输入+输出的总token数"
+        },
+        "memory_usage": {
+          "measure": "MB",
+          "description": "峰值内存使用量"
+        }
+      }
+    },
+    "sample_size": {
+      "tasks_per_condition": 50,
+      "total_tasks": 1800,
+      "replications": 3,
+      "rationale": "确保统计功效>0.8，效应量d=0.5，α=0.05"
+    }
+  },
+  "datasets": [
+    {
+      "name": "HumanEval",
+      "size": 164,
+      "description": "Python编程问题基准测试",
+      "usage": "主要性能评估"
+    },
+    {
+      "name": "MBPP",
+      "size": 974,
+      "description": "Python编程问题数据集",
+      "usage": "扩展性能评估"
+    },
+    {
+      "name": "PythonSaga",
+      "size": 185,
+      "description": "涵盖38个编程概念的任务集",
+      "usage": "概念覆盖度评估"
+    },
+    {
+      "name": "CustomDataset",
+      "size": 200,
+      "description": "自定义多样化任务集",
+      "usage": "泛化性测试"
+    }
+  ],
+  "models": [
+    {
+      "name": "GPT-4/4o",
+      "type": "proprietary",
+      "rationale": "当前最先进的通用LLM"
+    },
+    {
+      "name": "CodeLlama",
+      "type": "open_source",
+      "rationale": "流行的开源代码生成模型"
+    },
+    {
+      "name": "WizardCoder",
+      "type": "specialized",
+      "rationale": "专门针对代码生成的模型"
+    }
+  ],
+  "evaluation_methods": {
+    "automated": {
+      "unit_testing": {
+        "tools": [
+          "pytest",
+          "unittest"
+        ],
+        "metrics": [
+          "pass_rate",
+          "coverage"
+        ]
+      },
+      "static_analysis": {
+        "tools": [
+          "pylint",
+          "flake8",
+          "radon"
+        ],
+        "metrics": [
+          "complexity",
+          "maintainability_index"
+        ]
+      }
+    },
+    "human": {
+      "expert_review": {
+        "reviewers": 3,
+        "criteria": [
+          "correctness",
+          "readability",
+          "efficiency",
+          "maintainability"
+        ],
+        "scale": "1-5 Likert scale"
+      },
+      "user_study": {
+        "participants": 30,
+        "measures": [
+          "completion_time",
+          "satisfaction",
+          "preference"
+        ],
+        "design": "within-subjects counterbalanced"
+      }
+    }
+  },
+  "timeline": {
+    "phase_1": {
+      "name": "文献综述与实验设计",
+      "duration": "2个月",
+      "milestones": [
+        "完成系统文献综述",
+        "确定实验设计方案",
+        "准备数据集和工具"
+      ],
+      "deliverables": [
+        "文献综述报告",
+        "详细实验设计文档",
+        "数据集预处理脚本"
+      ]
+    },
+    "phase_2": {
+      "name": "预实验与工具开发",
+      "duration": "3个月",
+      "milestones": [
+        "完成小规模预实验",
+        "开发评估工具链",
+        "验证实验流程"
+      ],
+      "deliverables": [
+        "预实验报告",
+        "评估工具代码库",
+        "实验流程文档"
+      ]
+    },
+    "phase_3": {
+      "name": "正式实验执行",
+      "duration": "4个月",
+      "milestones": [
+        "完成大规模实验",
+        "收集和清理数据",
+        "初步数据分析"
+      ],
+      "deliverables": [
+        "原始实验数据",
+        "初步分析报告",
+        "假设验证结果"
+      ]
+    },
+    "phase_4": {
+      "name": "深入分析与论文撰写",
+      "duration": "4个月",
+      "milestones": [
+        "完成统计分析",
+        "构建理论框架",
+        "撰写研究论文"
+      ],
+      "deliverables": [
+        "统计分析报告",
+        "理论框架文档",
+        "论文初稿"
+      ]
+    },
+    "phase_5": {
+      "name": "工具开发与推广",
+      "duration": "3个月",
+      "milestones": [
+        "开发决策支持工具",
+        "编写文档和教程",
+        "开源发布和推广"
+      ],
+      "deliverables": [
+        "决策支持系统",
+        "用户文档和教程",
+        "开源代码仓库"
       ]
     }
   },
-  "risk_assessment": [
-    {
-      "risk": "模型 API 成本过高",
-      "probability": "中",
-      "impact": "高",
-      "mitigation": "优先使用开源模型进行初步实验，申请研究资助"
+  "resources": {
+    "computational": {
+      "gpu_hours": 5000,
+      "cloud_credits": 5000,
+      "storage": "1TB"
     },
-    {
-      "risk": "复杂度特征预测不准确",
-      "probability": "低",
-      "impact": "中",
-      "mitigation": "采用集成学习方法，增加特征维度"
+    "human": {
+      "researchers": 3,
+      "experts": 3,
+      "participants": 30
     },
-    {
-      "risk": "跨模型泛化效果不佳",
-      "probability": "中",
-      "impact": "中",
-      "mitigation": "设计模型特定的阈值校准模块"
-    },
-    {
-      "risk": "动态调整机制引入额外延迟",
-      "probability": "低",
-      "impact": "低",
-      "mitigation": "优化中间结果评估算法，设置超时机制"
+    "software": {
+      "llm_apis": [
+        "OpenAI",
+        "Anthropic",
+        "HuggingFace"
+      ],
+      "analysis_tools": [
+        "Python",
+        "R",
+        "Jupyter"
+      ],
+      "version_control": "Git"
     }
-  ],
-  "timeline": {
-    "total_duration_months": 9,
-    "start_date": "2026-02-01",
-    "end_date": "2026-10-31",
-    "milestones": [
+  },
+  "risk_management": {
+    "technical_risks": [
       {
-        "name": "数据收集完成",
-        "month": 2,
-        "deliverable": "复杂度特征数据集"
+        "risk": "代码正确性评估困难",
+        "probability": "中等",
+        "impact": "高",
+        "mitigation": "结合自动化和人工评估，开发专用评估工具"
       },
       {
-        "name": "基准测试完成",
-        "month": 4,
-        "deliverable": "策略性能对比报告"
+        "risk": "计算资源不足",
+        "probability": "高",
+        "impact": "中等",
+        "mitigation": "优化实验设计，使用云计算资源，申请研究资助"
+      }
+    ],
+    "methodological_risks": [
+      {
+        "risk": "任务复杂度量化主观",
+        "probability": "中等",
+        "impact": "中等",
+        "mitigation": "采用多专家评审和多维度量化方法"
       },
       {
-        "name": "CAPE 原型完成",
-        "month": 6,
-        "deliverable": "CAPE 原型系统"
-      },
-      {
-        "name": "论文初稿完成",
-        "month": 8,
-        "deliverable": "研究论文初稿"
-      },
-      {
-        "name": "工具包发布",
-        "month": 9,
-        "deliverable": "GitHub 仓库"
+        "risk": "实验结果泛化性有限",
+        "probability": "低",
+        "impact": "高",
+        "mitigation": "使用多样化数据集，进行跨模型验证"
       }
     ]
   },
-  "resource_requirements": {
-    "computational_resources": {
-      "gpu_hours": 500,
-      "estimated_cost_usd": 2000,
-      "description": "主要用于开源模型微调和复杂度预测器训练"
-    },
-    "api_budget": {
-      "estimated_tokens": 50000000,
-      "estimated_cost_usd": 1500,
-      "description": "用于 GPT-4o、Claude-3.5 等闭源模型的基准测试"
-    },
-    "human_resources": {
-      "researchers": 2,
-      "engineers": 1,
-      "description": "1 名主要研究者 + 1 名合作者 + 1 名工程支持"
-    }
+  "ethical_considerations": {
+    "data_privacy": "仅使用公开数据集，匿名化处理所有数据",
+    "transparency": "公开所有实验细节、代码和数据",
+    "reproducibility": "提供详细复现指南和容器化环境",
+    "social_impact": "分析研究对编程教育和就业的影响，提出负责任使用指南"
   },
-  "ethical_considerations": [
-    {
-      "aspect": "数据使用",
-      "consideration": "所有基准数据集均为公开数据集，遵守相应许可协议"
-    },
-    {
-      "aspect": "模型使用",
-      "consideration": "遵守各模型 API 的使用条款，不用于生成恶意代码"
-    },
-    {
-      "aspect": "环境影响",
-      "consideration": "通过成本优化减少不必要的计算资源消耗，符合绿色 AI 理念"
-    },
-    {
-      "aspect": "可复现性",
-      "consideration": "开源代码和数据，确保研究结果可复现"
-    }
-  ]
+  "expected_contributions": {
+    "theoretical": [
+      "Prompt策略有效性理论框架",
+      "计算成本量化模型",
+      "领域适应性理论解释"
+    ],
+    "practical": [
+      "基于实证的Prompt策略选择指南",
+      "成本优化建议和最佳实践",
+      "决策支持工具和系统"
+    ],
+    "methodological": [
+      "代码生成评估框架",
+      "扩展基准数据集",
+      "实验设计和分析方法"
+    ]
+  }
 }

@@ -1,7 +1,14 @@
 """主入口"""
 
+import sys
+import io
 from pathlib import Path
 from src.workflows.research_flow import create_research_app
+
+# Fix Windows terminal encoding
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 
 def main():
@@ -10,20 +17,13 @@ def main():
     app = create_research_app()
 
     # 初始状态
+    # ============ 修改这里：设置你的项目目录 ============
+    project_name = "my-research"  # 改成你的项目名称
+
     initial_state = {
-        "project_dir": "projects/prompt-engineering-research",
-        "research_directions": """
-# 研究方向
-
-探索不同 Prompt 策略对 LLM 代码生成质量的影响。
-
-对比：
-- Zero-shot prompting（零样本提示）
-- Few-shot prompting（少样本提示）
-- Chain-of-Thought prompting（思维链提示）
-
-假设：CoT 提示在复杂算法任务上优于 Zero-shot。
-""",
+        "project_dir": f"projects/{project_name}",
+        # 研究方向将从 input/research_directions.md 自动读取
+        "research_directions": Path(f"projects/{project_name}/input/research_directions.md").read_text(encoding="utf-8"),
         "current_stage": "ideation",
         "completed_agents": [],
         "messages": [],
@@ -34,7 +34,7 @@ def main():
     print("🚀 启动 LightFARS 研究工作流...")
 
     # 配置（Checkpointer 需要 thread_id）
-    config = {"configurable": {"thread_id": "research-thread-001"}}
+    config = {"configurable": {"thread_id": f"research-thread-{project_name}"}}
 
     result = app.invoke(initial_state, config=config)
 

@@ -1,116 +1,531 @@
 {
-  "project_name": "CAPE: Complexity-Adaptive Prompt Engineering for Code Generation",
+  "project_name": "Prompt工程策略对代码生成质量与效率的影响研究",
   "version": "1.0",
-  "created_date": "2025-01-15",
-  "last_updated": "2025-01-15T12:00:00",
-  "overall_progress": 0.35,
-  "completed_tasks": [
-    "BASE-001",
-    "BASE-008",
-    "BASE-009",
-    "BASE-010",
-    "MAIN-006",
-    "MAIN-007",
-    "MAIN-008",
-    "ANA-005",
-    "ANA-006"
-  ],
-  "task_status": {
-    "BASE-001": {
-      "status": "completed",
-      "completed_at": "2025-01-15T10:30:00",
-      "output_files": [
-        "exp/data/processed/humaneval.json"
-      ]
+  "created_date": "2024-01-15",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "环境配置与基础设施搭建",
+      "description": "设置实验所需的所有软件环境、工具和基础设施",
+      "detailed_steps": [
+        "1. 安装Python 3.9+和必要的包管理工具",
+        "2. 配置模型API访问（OpenAI API、HuggingFace等）",
+        "3. 安装代码评估工具（pytest, pylint, flake8等）",
+        "4. 设置数据存储和版本控制系统",
+        "5. 配置实验日志和监控系统",
+        "6. 创建项目目录结构和配置文件"
+      ],
+      "dependencies": [],
+      "expected_outputs": [
+        "完整可用的开发环境",
+        "API访问配置完成",
+        "评估工具安装验证",
+        "项目结构文档"
+      ],
+      "estimated_duration": "3天",
+      "priority": "high"
     },
-    "BASE-008": {
-      "status": "completed",
-      "completed_at": "2025-01-15T11:00:00",
-      "output_files": [
-        "exp/results/experiment_results.json"
-      ]
+    {
+      "id": "T2",
+      "title": "数据集准备与预处理",
+      "description": "收集、整理和预处理所有实验数据集",
+      "detailed_steps": [
+        "1. 下载基准数据集（HumanEval, MBPP, PythonSaga）",
+        "2. 创建自定义任务集（200个任务）",
+        "3. 从GitHub提取真实世界项目任务",
+        "4. 对任务进行复杂度分类（简单/中等/复杂）",
+        "5. 对任务进行领域分类（算法/数据处理/系统编程/Web开发）",
+        "6. 创建任务元数据和索引文件",
+        "7. 划分训练/验证/测试集"
+      ],
+      "dependencies": [
+        "T1"
+      ],
+      "expected_outputs": [
+        "完整的数据集集合",
+        "任务分类和标注文件",
+        "数据集统计报告",
+        "数据质量检查报告"
+      ],
+      "estimated_duration": "5天",
+      "priority": "high"
     },
-    "BASE-009": {
-      "status": "completed",
-      "completed_at": "2025-01-15T11:00:00",
-      "output_files": [
-        "exp/results/experiment_results.json"
-      ]
+    {
+      "id": "T3",
+      "title": "Prompt策略模板开发",
+      "description": "设计和实现三种主要的Prompt策略模板",
+      "detailed_steps": [
+        "1. 设计Zero-shot提示模板",
+        "2. 设计Few-shot提示模板（3-5个示例）",
+        "3. 设计Chain-of-Thought提示模板",
+        "4. 实现模板参数化系统",
+        "5. 创建模板验证和测试用例",
+        "6. 开发模板组合和变体生成工具"
+      ],
+      "dependencies": [
+        "T1"
+      ],
+      "expected_outputs": [
+        "三种Prompt策略的标准化模板",
+        "模板参数配置系统",
+        "模板测试套件",
+        "模板使用文档"
+      ],
+      "estimated_duration": "4天",
+      "priority": "high"
     },
-    "BASE-010": {
-      "status": "completed",
-      "completed_at": "2025-01-15T11:00:00",
-      "output_files": [
-        "exp/results/experiment_results.json"
-      ]
+    {
+      "id": "T4",
+      "title": "评估框架开发",
+      "description": "开发自动化评估框架和工具",
+      "detailed_steps": [
+        "1. 实现代码正确性评估（单元测试执行）",
+        "2. 集成静态代码分析工具（pylint, flake8）",
+        "3. 开发代码质量度量计算（圈复杂度等）",
+        "4. 实现性能指标收集（响应时间、token消耗）",
+        "5. 创建评估结果存储和可视化模块",
+        "6. 开发批量评估和并行处理功能"
+      ],
+      "dependencies": [
+        "T1"
+      ],
+      "expected_outputs": [
+        "完整的评估框架代码",
+        "评估工具API文档",
+        "评估结果数据库设计",
+        "可视化仪表板原型"
+      ],
+      "estimated_duration": "6天",
+      "priority": "high"
     },
-    "MAIN-006": {
-      "status": "completed",
-      "completed_at": "2025-01-15T11:30:00",
-      "output_files": [
-        "exp/results/experiment_results.json"
-      ]
+    {
+      "id": "T5",
+      "title": "预实验：小规模验证",
+      "description": "在小规模数据集上验证实验流程和工具",
+      "detailed_steps": [
+        "1. 选择20个代表性任务进行预实验",
+        "2. 使用所有三种Prompt策略生成代码",
+        "3. 运行自动化评估框架",
+        "4. 收集初步性能数据",
+        "5. 识别和修复技术问题",
+        "6. 优化实验参数和配置"
+      ],
+      "dependencies": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "expected_outputs": [
+        "预实验完整报告",
+        "实验流程验证结果",
+        "技术问题修复记录",
+        "参数优化建议"
+      ],
+      "estimated_duration": "3天",
+      "priority": "medium"
     },
-    "MAIN-007": {
-      "status": "completed",
-      "completed_at": "2025-01-15T11:30:00",
-      "output_files": [
-        "exp/results/experiment_results.json"
-      ]
+    {
+      "id": "T6",
+      "title": "基线实验：Zero-shot策略",
+      "description": "在所有数据集上执行Zero-shot策略的完整实验",
+      "detailed_steps": [
+        "1. 准备所有任务的Zero-shot提示",
+        "2. 使用GPT-4模型生成代码",
+        "3. 执行代码正确性评估",
+        "4. 计算代码质量指标",
+        "5. 记录响应时间和token消耗",
+        "6. 存储所有实验结果"
+      ],
+      "dependencies": [
+        "T5"
+      ],
+      "expected_outputs": [
+        "Zero-shot策略完整结果数据集",
+        "性能基准报告",
+        "错误分析和分类",
+        "计算成本统计"
+      ],
+      "estimated_duration": "7天",
+      "priority": "high"
     },
-    "MAIN-008": {
-      "status": "completed",
-      "completed_at": "2025-01-15T11:30:00",
-      "output_files": [
-        "exp/results/experiment_results.json"
-      ]
+    {
+      "id": "T7",
+      "title": "主要实验1：Few-shot策略",
+      "description": "执行Few-shot策略的完整实验，探索最优示例数量",
+      "detailed_steps": [
+        "1. 设计不同示例数量的Few-shot提示（1, 3, 5, 7个）",
+        "2. 使用GPT-4模型生成代码",
+        "3. 评估代码正确性和质量",
+        "4. 分析示例数量对性能的影响",
+        "5. 计算性能-成本权衡曲线",
+        "6. 识别最优示例数量"
+      ],
+      "dependencies": [
+        "T6"
+      ],
+      "expected_outputs": [
+        "Few-shot策略完整结果",
+        "示例数量影响分析报告",
+        "最优示例数量确定",
+        "成本效益分析"
+      ],
+      "estimated_duration": "7天",
+      "priority": "high"
     },
-    "ANA-005": {
-      "status": "completed",
-      "completed_at": "2025-01-15T12:00:00",
-      "output_files": [
-        "exp/analysis.md"
-      ]
+    {
+      "id": "T8",
+      "title": "主要实验2：Chain-of-Thought策略",
+      "description": "执行CoT策略的完整实验，分析任务复杂度调节效应",
+      "detailed_steps": [
+        "1. 为所有任务设计CoT提示",
+        "2. 使用GPT-4模型生成代码和推理过程",
+        "3. 评估代码正确性，特别关注复杂任务",
+        "4. 分析任务复杂度对CoT效果的影响",
+        "5. 验证H1假设（任务复杂度调节假设）",
+        "6. 比较CoT与Zero-shot在复杂任务上的差异"
+      ],
+      "dependencies": [
+        "T6"
+      ],
+      "expected_outputs": [
+        "CoT策略完整结果",
+        "任务复杂度调节效应分析",
+        "H1假设验证报告",
+        "复杂任务性能提升量化"
+      ],
+      "estimated_duration": "7天",
+      "priority": "high"
     },
-    "ANA-006": {
-      "status": "completed",
-      "completed_at": "2025-01-15T12:00:00",
-      "output_files": [
-        "exp/figures/performance_comparison.svg",
-        "exp/figures/strategy_distribution.svg"
-      ]
+    {
+      "id": "T9",
+      "title": "跨模型比较实验",
+      "description": "在不同模型上重复关键实验，验证结果的泛化性",
+      "detailed_steps": [
+        "1. 选择对比模型（CodeLlama, WizardCoder）",
+        "2. 在代表性任务子集上运行三种Prompt策略",
+        "3. 比较不同模型的性能差异",
+        "4. 分析模型特性对Prompt策略敏感性的影响",
+        "5. 验证结果在不同模型间的稳定性"
+      ],
+      "dependencies": [
+        "T6",
+        "T7",
+        "T8"
+      ],
+      "expected_outputs": [
+        "跨模型比较结果",
+        "模型特性影响分析",
+        "结果泛化性验证报告",
+        "模型推荐指南"
+      ],
+      "estimated_duration": "5天",
+      "priority": "medium"
+    },
+    {
+      "id": "T10",
+      "title": "人工评估实验",
+      "description": "组织专家评审和用户研究，补充自动化评估",
+      "detailed_steps": [
+        "1. 设计专家评审问卷和评分标准",
+        "2. 招募3名资深软件工程师",
+        "3. 选择代表性代码样本进行评审",
+        "4. 设计用户研究实验（30名程序员）",
+        "5. 收集主观评价和偏好数据",
+        "6. 分析人工评估与自动化评估的一致性"
+      ],
+      "dependencies": [
+        "T6",
+        "T7",
+        "T8"
+      ],
+      "expected_outputs": [
+        "专家评审报告",
+        "用户研究结果",
+        "主观-客观评估一致性分析",
+        "人工评估指南"
+      ],
+      "estimated_duration": "10天",
+      "priority": "medium"
+    },
+    {
+      "id": "T11",
+      "title": "数据整合与统计分析",
+      "description": "整合所有实验结果，进行深入的统计分析",
+      "detailed_steps": [
+        "1. 整合所有实验数据到统一数据库",
+        "2. 执行方差分析（ANOVA）检验策略差异",
+        "3. 进行回归分析验证复杂度调节效应",
+        "4. 计算成本效益比和边际效益",
+        "5. 执行聚类分析识别任务模式",
+        "6. 验证所有研究假设"
+      ],
+      "dependencies": [
+        "T6",
+        "T7",
+        "T8",
+        "T9",
+        "T10"
+      ],
+      "expected_outputs": [
+        "完整实验数据集",
+        "统计分析报告",
+        "假设验证结果汇总",
+        "统计显著性检验结果"
+      ],
+      "estimated_duration": "7天",
+      "priority": "high"
+    },
+    {
+      "id": "T12",
+      "title": "可视化与结果展示",
+      "description": "创建结果可视化和交互式展示工具",
+      "detailed_steps": [
+        "1. 设计性能对比可视化图表",
+        "2. 创建成本效益曲线图",
+        "3. 开发交互式结果探索工具",
+        "4. 制作策略选择决策树可视化",
+        "5. 创建任务复杂度分布图",
+        "6. 开发结果报告生成器"
+      ],
+      "dependencies": [
+        "T11"
+      ],
+      "expected_outputs": [
+        "完整可视化图表集",
+        "交互式展示工具",
+        "结果报告模板",
+        "数据可视化指南"
+      ],
+      "estimated_duration": "4天",
+      "priority": "medium"
+    },
+    {
+      "id": "T13",
+      "title": "决策支持系统开发",
+      "description": "基于实验结果开发Prompt策略推荐系统",
+      "detailed_steps": [
+        "1. 分析任务特征与最优策略的关联模式",
+        "2. 设计决策规则和推荐算法",
+        "3. 开发基于机器学习的策略推荐模型",
+        "4. 创建用户界面和API",
+        "5. 实现实时策略推荐功能",
+        "6. 开发性能预测模块"
+      ],
+      "dependencies": [
+        "T11"
+      ],
+      "expected_outputs": [
+        "决策支持系统原型",
+        "推荐算法实现",
+        "用户界面设计",
+        "系统性能评估报告"
+      ],
+      "estimated_duration": "8天",
+      "priority": "medium"
+    },
+    {
+      "id": "T14",
+      "title": "研究论文撰写",
+      "description": "撰写完整的研究论文和文档",
+      "detailed_steps": [
+        "1. 撰写方法部分（实验设计、数据集、评估）",
+        "2. 撰写结果部分（数据分析、假设验证）",
+        "3. 撰写讨论部分（理论贡献、实践意义）",
+        "4. 撰写结论和未来工作",
+        "5. 准备图表和附录材料",
+        "6. 进行同行评审和修改"
+      ],
+      "dependencies": [
+        "T11",
+        "T12"
+      ],
+      "expected_outputs": [
+        "完整研究论文草稿",
+        "图表和可视化材料",
+        "参考文献库",
+        "投稿准备材料"
+      ],
+      "estimated_duration": "10天",
+      "priority": "high"
+    },
+    {
+      "id": "T15",
+      "title": "工具开源与文档编写",
+      "description": "准备所有工具和数据的开源发布",
+      "detailed_steps": [
+        "1. 整理和清理所有代码库",
+        "2. 编写详细的API文档和使用指南",
+        "3. 创建示例和教程",
+        "4. 准备数据集发布许可证",
+        "5. 设置GitHub仓库和CI/CD流程",
+        "6. 编写技术报告和用户手册"
+      ],
+      "dependencies": [
+        "T13",
+        "T14"
+      ],
+      "expected_outputs": [
+        "开源代码仓库",
+        "完整文档集",
+        "示例和教程",
+        "发布准备检查清单"
+      ],
+      "estimated_duration": "5天",
+      "priority": "medium"
+    },
+    {
+      "id": "T16",
+      "title": "最终验证与质量保证",
+      "description": "进行最终的质量检查和结果验证",
+      "detailed_steps": [
+        "1. 重复关键实验验证可重复性",
+        "2. 进行结果敏感性分析",
+        "3. 检查数据一致性和完整性",
+        "4. 验证所有代码和工具的功能",
+        "5. 进行性能基准测试",
+        "6. 准备最终发布版本"
+      ],
+      "dependencies": [
+        "T15"
+      ],
+      "expected_outputs": [
+        "可重复性验证报告",
+        "质量保证检查清单",
+        "最终发布版本",
+        "项目总结报告"
+      ],
+      "estimated_duration": "3天",
+      "priority": "high"
     }
-  },
-  "experiment_summary": {
-    "models_tested": [
-      "gpt4o",
-      "codellama",
-      "claude"
+  ],
+  "task_dependencies": {
+    "T1": [],
+    "T2": [
+      "T1"
     ],
-    "datasets_used": [
-      "HumanEval (100 tasks)"
+    "T3": [
+      "T1"
     ],
-    "strategies_compared": [
-      "zero_shot",
-      "few_shot",
-      "cot",
-      "CAPE"
+    "T4": [
+      "T1"
     ],
-    "key_findings": {
-      "token_savings": "55.7%",
-      "qc_improvement": "29-33%",
-      "performance_retention": "85-88% of CoT"
-    },
-    "hypotheses_validated": [
-      "H1",
-      "H1.2",
-      "H1.4"
+    "T5": [
+      "T2",
+      "T3",
+      "T4"
     ],
-    "hypotheses_partial": [
-      "H1.3"
+    "T6": [
+      "T5"
     ],
-    "hypotheses_pending": [
-      "H1.1"
+    "T7": [
+      "T6"
+    ],
+    "T8": [
+      "T6"
+    ],
+    "T9": [
+      "T6",
+      "T7",
+      "T8"
+    ],
+    "T10": [
+      "T6",
+      "T7",
+      "T8"
+    ],
+    "T11": [
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10"
+    ],
+    "T12": [
+      "T11"
+    ],
+    "T13": [
+      "T11"
+    ],
+    "T14": [
+      "T11",
+      "T12"
+    ],
+    "T15": [
+      "T13",
+      "T14"
+    ],
+    "T16": [
+      "T15"
     ]
+  },
+  "evaluation_metrics": {
+    "primary_metrics": [
+      {
+        "name": "代码正确性",
+        "description": "通过测试用例的比例",
+        "measurement": "单元测试通过率",
+        "target": ">80% for best strategy"
+      },
+      {
+        "name": "响应时间",
+        "description": "从输入到输出的时间",
+        "measurement": "平均响应时间（秒）",
+        "target": "<30秒 for 95% of tasks"
+      },
+      {
+        "name": "计算成本",
+        "description": "token消耗量",
+        "measurement": "平均token数 per task",
+        "target": "Minimize while maintaining performance"
+      }
+    ],
+    "secondary_metrics": [
+      {
+        "name": "代码质量",
+        "description": "可读性和可维护性",
+        "measurement": "静态分析得分（1-10）",
+        "target": ">7.0 average"
+      },
+      {
+        "name": "功能完整性",
+        "description": "满足需求的程度",
+        "measurement": "需求覆盖百分比",
+        "target": ">90%"
+      },
+      {
+        "name": "用户满意度",
+        "description": "主观评价得分",
+        "measurement": "Likert量表（1-5）",
+        "target": ">4.0 average"
+      }
+    ]
+  },
+  "success_criteria": {
+    "technical_success": [
+      "所有实验可重复执行",
+      "自动化评估框架稳定运行",
+      "数据收集完整率>95%",
+      "工具错误率<5%"
+    ],
+    "research_success": [
+      "验证至少3个主要研究假设",
+      "发现统计显著的结果差异（p<0.05）",
+      "建立可解释的性能-成本权衡模型",
+      "开发实用的策略选择指南"
+    ],
+    "practical_success": [
+      "决策支持系统准确率>80%",
+      "工具用户满意度>4.0/5.0",
+      "开源项目获得>100 stars",
+      "研究论文被知名会议/期刊接受"
+    ]
+  },
+  "timeline": {
+    "phase_1": "环境与数据准备（2周）",
+    "phase_2": "预实验与框架开发（2周）",
+    "phase_3": "主要实验执行（4周）",
+    "phase_4": "分析与工具开发（3周）",
+    "phase_5": "论文与发布准备（3周）",
+    "total_duration": "14周（约3.5个月）"
   }
 }

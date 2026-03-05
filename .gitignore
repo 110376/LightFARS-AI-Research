@@ -1,7 +1,13 @@
-# ============= 环境配置（隐私数据） =============
+# ============= 环境配置（隐私数据 - 必须忽略）============
 config/.env
 *.env
 !.env.example
+
+# ============= API Keys 和敏感信息 =============
+*_api_key.txt
+*_secret.*
+credentials.json
+secrets/
 
 # ============= Python =============
 __pycache__/
@@ -30,6 +36,7 @@ wheels/
 venv/
 ENV/
 env/
+.conda/
 
 # ============= IDE / 编辑器 =============
 .idea/
@@ -40,10 +47,13 @@ env/
 .project
 .pydevproject
 .settings/
+*.sublime-project
+*.sublime-workspace
 
 # ============= 日志文件 =============
 *.log
 logs/
+*.log.*
 
 # ============= 缓存 =============
 .ruff_cache/
@@ -51,27 +61,57 @@ logs/
 .pytest_cache/
 .coverage
 htmlcov/
+.cache/
+__pycache__/
 
 # ============= 系统文件 =============
 .DS_Store
 Thumbs.db
 Desktop.ini
+$RECYCLE.BIN/
 
 # ============= 项目特定 =============
-# 实验结果（可选，如果想提交结果可以注释掉这行）
-# exp/results/
-# exp/figures/
+# 研究项目输出（可选，用户自己的研究结果）
+projects/*/idea/
+projects/*/exp/
+projects/*/paper/
+projects/*/.state/
+projects/*/logs/
+
+# 保留示例项目
+!projects/prompt-engineering-research/
 
 # 临时文件
 *.tmp
 *.temp
 *.bak
+*.backup
 
 # Jupyter Notebook
 .ipynb_checkpoints/
+*.ipynb
 
-# 数据文件（如果有大文件）
+# 数据文件
 *.pkl
 *.pickle
 *.h5
 *.hdf5
+*.csv
+*.json.bak
+
+# ============= Streamlit =============
+.streamlit/
+
+# ============= 测试 =============
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ============= 文档 =============
+docs/_build/
+site/
+
+# ============= OS =============
+.Trash-*
+.nfs*

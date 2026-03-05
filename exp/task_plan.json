@@ -120,6 +120,98 @@
         "error": null,
         "output_files": []
       }
+    },
+    "MAIN-001": {
+      "name": "CAPE 框架实现",
+      "description": "实现 CAPE 框架核心逻辑，包括复杂度预测和策略选择",
+      "status": "completed",
+      "started_at": "2026-03-05T17:22:31.782360",
+      "dependencies": [
+        "BASE-001"
+      ],
+      "output_files": [
+        "exp/code/cape_framework.py"
+      ],
+      "completed_at": "2026-03-05T17:46:50.171469"
+    },
+    "MAIN-002": {
+      "name": "复杂度预测器训练",
+      "description": "训练基于代码特征的复杂度预测模型",
+      "status": "completed",
+      "started_at": "2026-03-05T17:47:04.479305",
+      "dependencies": [
+        "MAIN-001"
+      ],
+      "output_files": [
+        "exp/models/complexity_predictor.pkl",
+        "exp/results/predictor_metrics.json"
+      ],
+      "completed_at": "2026-03-05T17:49:40.240266"
+    },
+    "MAIN-003": {
+      "name": "阈值优化实验",
+      "description": "通过网格搜索优化 T1 和 T2 阈值",
+      "status": "completed",
+      "started_at": "2026-03-05T17:49:54.612818",
+      "dependencies": [
+        "MAIN-002"
+      ],
+      "output_files": [
+        "exp/results/threshold_optimization.json",
+        "exp/figures/threshold_heatmap.svg"
+      ],
+      "completed_at": "2026-03-05T17:59:08.738698"
+    },
+    "MAIN-004": {
+      "name": "基线策略实现",
+      "description": "实现 Zero-Shot、Few-Shot、CoT 基线策略",
+      "status": "completed",
+      "started_at": "2026-03-05T17:59:22.783172",
+      "dependencies": [
+        "MAIN-001"
+      ],
+      "output_files": [
+        "exp/code/baseline_strategies.py"
+      ],
+      "completed_at": "2026-03-05T18:03:03.228784"
+    },
+    "MAIN-005": {
+      "name": "实验运行脚本",
+      "description": "创建自动化实验运行脚本",
+      "status": "completed",
+      "started_at": "2026-03-05T18:03:17.720108",
+      "dependencies": [
+        "MAIN-003",
+        "MAIN-004"
+      ],
+      "output_files": [
+        "exp/code/run_experiment.py"
+      ],
+      "completed_at": "2026-03-05T18:10:53.134925"
+    },
+    "ANA-001": {
+      "name": "数据统计分析",
+      "description": "对实验结果进行统计分析，计算显著性",
+      "status": "completed",
+      "started_at": "2026-03-05T18:11:08.949245",
+      "dependencies": [
+        "MAIN-006",
+        "MAIN-007",
+        "MAIN-008"
+      ],
+      "output_files": [
+        "exp/results/statistical_analysis.json"
+      ],
+      "completed_at": "2026-03-05T18:20:15.761313"
     }
-  }
+  },
+  "completed_tasks": [
+    "MAIN-001",
+    "MAIN-002",
+    "MAIN-003",
+    "MAIN-004",
+    "MAIN-005",
+    "ANA-001"
+  ],
+  "overall_progress": 0.67
 }

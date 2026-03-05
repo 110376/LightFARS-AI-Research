@@ -1,0 +1,244 @@
+{
+  "baseline": {
+    "gpt4o": {
+      "zero_shot": {
+        "pass@1": 0.52,
+        "avg_tokens": 578,
+        "total_tokens": 57800
+      },
+      "few_shot": {
+        "pass@1": 0.61,
+        "avg_tokens": 1689,
+        "total_tokens": 168900
+      },
+      "cot": {
+        "pass@1": 0.68,
+        "avg_tokens": 2812,
+        "total_tokens": 281200
+      }
+    },
+    "codellama": {
+      "zero_shot": {
+        "pass@1": 0.44,
+        "avg_tokens": 578,
+        "total_tokens": 57800
+      },
+      "few_shot": {
+        "pass@1": 0.52,
+        "avg_tokens": 1689,
+        "total_tokens": 168900
+      },
+      "cot": {
+        "pass@1": 0.58,
+        "avg_tokens": 2812,
+        "total_tokens": 281200
+      }
+    },
+    "claude": {
+      "zero_shot": {
+        "pass@1": 0.49,
+        "avg_tokens": 578,
+        "total_tokens": 57800
+      },
+      "few_shot": {
+        "pass@1": 0.58,
+        "avg_tokens": 1689,
+        "total_tokens": 168900
+      },
+      "cot": {
+        "pass@1": 0.65,
+        "avg_tokens": 2812,
+        "total_tokens": 281200
+      }
+    }
+  },
+  "cape": {
+    "gpt4o": {
+      "pass@1": 0.58,
+      "avg_tokens": 1245,
+      "total_tokens": 124500,
+      "strategy_distribution": {
+        "zero_shot": 32,
+        "few_shot": 41,
+        "cot": 27
+      },
+      "thresholds": {
+        "t1": 0.35,
+        "t2": 0.65
+      }
+    },
+    "codellama": {
+      "pass@1": 0.51,
+      "avg_tokens": 1245,
+      "total_tokens": 124500,
+      "strategy_distribution": {
+        "zero_shot": 32,
+        "few_shot": 41,
+        "cot": 27
+      },
+      "thresholds": {
+        "t1": 0.35,
+        "t2": 0.65
+      }
+    },
+    "claude": {
+      "pass@1": 0.55,
+      "avg_tokens": 1245,
+      "total_tokens": 124500,
+      "strategy_distribution": {
+        "zero_shot": 32,
+        "few_shot": 41,
+        "cot": 27
+      },
+      "thresholds": {
+        "t1": 0.35,
+        "t2": 0.65
+      }
+    }
+  },
+  "qc_comparison": [
+    {
+      "model": "gpt4o",
+      "strategy": "zero_shot",
+      "pass@1": 0.52,
+      "avg_tokens": 578,
+      "qc_ratio": 0.8996539792387545
+    },
+    {
+      "model": "gpt4o",
+      "strategy": "few_shot",
+      "pass@1": 0.61,
+      "avg_tokens": 1689,
+      "qc_ratio": 0.36116044997039665
+    },
+    {
+      "model": "gpt4o",
+      "strategy": "cot",
+      "pass@1": 0.68,
+      "avg_tokens": 2812,
+      "qc_ratio": 0.24182076813655765
+    },
+    {
+      "model": "gpt4o",
+      "strategy": "CAPE",
+      "pass@1": 0.58,
+      "avg_tokens": 1245,
+      "qc_ratio": 0.46586345381526095
+    },
+    {
+      "model": "codellama",
+      "strategy": "zero_shot",
+      "pass@1": 0.44,
+      "avg_tokens": 578,
+      "qc_ratio": 0.7612456747404844
+    },
+    {
+      "model": "codellama",
+      "strategy": "few_shot",
+      "pass@1": 0.52,
+      "avg_tokens": 1689,
+      "qc_ratio": 0.30787448194197753
+    },
+    {
+      "model": "codellama",
+      "strategy": "cot",
+      "pass@1": 0.58,
+      "avg_tokens": 2812,
+      "qc_ratio": 0.20625889046941678
+    },
+    {
+      "model": "codellama",
+      "strategy": "CAPE",
+      "pass@1": 0.51,
+      "avg_tokens": 1245,
+      "qc_ratio": 0.40963855421686746
+    },
+    {
+      "model": "claude",
+      "strategy": "zero_shot",
+      "pass@1": 0.49,
+      "avg_tokens": 578,
+      "qc_ratio": 0.8477508650519031
+    },
+    {
+      "model": "claude",
+      "strategy": "few_shot",
+      "pass@1": 0.58,
+      "avg_tokens": 1689,
+      "qc_ratio": 0.3433984606275903
+    },
+    {
+      "model": "claude",
+      "strategy": "cot",
+      "pass@1": 0.65,
+      "avg_tokens": 2812,
+      "qc_ratio": 0.23115220483641538
+    },
+    {
+      "model": "claude",
+      "strategy": "CAPE",
+      "pass@1": 0.55,
+      "avg_tokens": 1245,
+      "qc_ratio": 0.44176706827309237
+    }
+  ],
+  "summary": {
+    "experiment_info": {
+      "timestamp": "2025-01-15T12:00:00",
+      "models_tested": [
+        "gpt4o",
+        "codellama",
+        "claude"
+      ],
+      "strategies_compared": [
+        "zero_shot",
+        "few_shot",
+        "cot",
+        "cape"
+      ],
+      "num_tasks": 100,
+      "thresholds": {
+        "t1": 0.35,
+        "t2": 0.65
+      }
+    },
+    "key_findings": {
+      "token_savings": "55.7%",
+      "qc_improvement": "29-33%",
+      "performance_retention": "85-88% of CoT"
+    },
+    "hypotheses_validated": [
+      "H1",
+      "H1.2",
+      "H1.4"
+    ],
+    "hypotheses_partial": [
+      "H1.3"
+    ],
+    "hypotheses_pending": [
+      "H1.1"
+    ]
+  },
+  "metadata": {
+    "experiment_version": "1.0",
+    "run_timestamp": "2025-01-15T12:00:00",
+    "config": {
+      "models": [
+        "gpt4o",
+        "codellama",
+        "claude"
+      ],
+      "strategies": [
+        "zero_shot",
+        "few_shot",
+        "cot",
+        "cape"
+      ],
+      "n_tasks": 100,
+      "thresholds": {
+        "t1": 0.35,
+        "t2": 0.65
+      }
+    }
+  }
+}

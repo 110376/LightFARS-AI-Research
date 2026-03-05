@@ -1,0 +1,11 @@
+{
+  "test_mse": 0.01020580531091295,
+  "test_r2": 0.4724815805240141,
+  "feature_importance": {
+    "code_length": 0.19231554434766995,
+    "num_functions": 0.07200084157789827,
+    "num_loops": 0.23981673540750895,
+    "num_conditionals": 0.23931717985455128,
+    "algorithm_type": 0.25654969881237155
+  }
+}

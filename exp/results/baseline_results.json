@@ -1,0 +1,23 @@
+{
+  "zero_shot": {
+    "avg_tokens": 512.0,
+    "success_rate": 1.0,
+    "qc_ratio": 1.953125,
+    "total_tokens": 1024,
+    "success_count": 2
+  },
+  "few_shot": {
+    "avg_tokens": 1512.0,
+    "success_rate": 1.0,
+    "qc_ratio": 0.6613756613756614,
+    "total_tokens": 3024,
+    "success_count": 2
+  },
+  "cot": {
+    "avg_tokens": 2512.0,
+    "success_rate": 1.0,
+    "qc_ratio": 0.3980891719745223,
+    "total_tokens": 5024,
+    "success_count": 2
+  }
+}
