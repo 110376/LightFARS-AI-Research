@@ -69,14 +69,12 @@ pip install -r requirements.txt
 创建 `config/.env` 文件：
 
 ```bash
-# 推荐 DeepSeek（便宜好用）
+# 推荐 DeepSeek（性价比高）
 LLM_PROVIDER=openai
-LLM_API_KEY=你的DeepSeek-Key
+LLM_API_KEY=你的API-Key
 LLM_BASE_URL=https://api.deepseek.com/v1
 LLM_MODEL_ID=deepseek-chat
 ```
-
-> 💡 **提示**：DeepSeek 价格约为 ¥1/百万 token，运行一次完整研究只需几毛钱！
 
 ### 第四步：开始研究
 
@@ -123,17 +121,6 @@ projects/你的研究/
 └── paper/final/
     ├── report.md            # 完整论文
     └── paper.tex            # LaTeX 格式
-```
-
-### 生成的论文片段
-
-```
-# 研究提案：Prompt工程策略对代码生成质量的影响
-
-## 1. 研究背景
-
-大型语言模型（LLMs）在代码生成任务上取得了显著进展...
-（自动生成的15页学术论文）
 ```
 
 ---
@@ -240,12 +227,14 @@ LightFARS-AI-Research/
 
 ## 🛠️ 支持的 LLM
 
-| 提供商 | 价格 | 配置 |
-|--------|------|------|
-| **DeepSeek** ⭐ 推荐 | ¥1/百万token | `base_url=https://api.deepseek.com/v1` |
-| OpenAI GPT-4 | $$ | `base_url=https://api.openai.com/v1` |
-| Anthropic Claude | $$$ | `provider=anthropic` |
-| 阿里百炼 | ¥ | `base_url=https://dashscope.aliyuncs.com/compatible-mode/v1` |
+| 提供商 | 推荐场景 | 配置 |
+|--------|----------|------|
+| **DeepSeek** | 性价比首选，中文优化 | `base_url=https://api.deepseek.com/v1` |
+| **OpenAI GPT** | 功能强大，生态完善 | `base_url=https://api.openai.com/v1` |
+| **Anthropic Claude** | 长文本处理优秀 | `provider=anthropic` |
+| **阿里百炼** | 国内服务稳定 | `base_url=https://dashscope.aliyuncs.com/compatible-mode/v1` |
+
+> 💡 **提示**：不同供应商价格差异较大，建议根据实际需求选择。具体价格请查看各供应商官方网站。
 
 ---
 
@@ -258,6 +247,16 @@ LightFARS-AI-Research/
 3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 提交 Pull Request
+
+---
+
+## 👥 Contributors
+
+感谢所有为这个项目做出贡献的人！
+
+<a href="https://github.com/110376/LightFARS-AI-Research/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=110376/LightFARS-AI-Research" />
+</a>
 
 ---
 
