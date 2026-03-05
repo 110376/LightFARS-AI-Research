@@ -1,318 +1,257 @@
+<div align="center">
+
+  <img src="https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/LangChain-1.0+-green?logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAyTDIgN0wyMCA3TDEyIDEyTTIgN0wxMiAxMkwyMCA3Ii8+PC9zdmc+" alt="LangChain" />
+  <img src="https://img.shields.io/badge/LangGraph-0.2+-orange?logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjYiIGN5PSIxMiIgcj0iMyIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iNiIgcj0iMyIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iMTgiIHI9IjMiLz48cGF0aCBkPSJNNiAxMkwxOCA2TTE4IDE4TDYgMTIiLz48L3N2Zz4=" alt="LangGraph" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License" />
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PR Welcome" />
+
+</div>
+
+<h1 align="center">LightFARS: AI 自动研究系统</h1>
 <p align="center">
-  <img src="https://img.shields.io/badge/python-3.11+-blue.svg" alt="Python">
-  <img src="https://img.shields.io/badge/langchain-1.0+-green.svg" alt="LangChain">
-  <img src="https://img.shields.io/badge/langgraph-0.2+-orange.svg" alt="LangGraph">
-  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
+  <b>让 AI 帮你做研究，从文献搜索到论文撰写的全自动化流程</b>
 </p>
 
-<h1 align="center">LightFARS</h1>
-
 <p align="center">
-  <em>Lightweight Fully Automated Research System</em>
-  <br>
-  <sub>轻量级全自动 AI 研究系统</sub>
-</p>
-
-<p align="center">
-  <a href="#-快速开始">快速开始</a> •
-  <a href="#-核心功能">核心功能</a> •
-  <a href="#-使用方式">使用方式</a> •
-  <a href="#-学习资源">学习资源</a>
+  <a href="#-快速开始"><b>快速开始</b></a> •
+  <a href="#-演示效果"><b>演示效果</b></a> •
+  <a href="#-核心架构"><b>核心架构</b></a> •
+  <a href="#-自定义开发"><b>自定义开发</b></a>
 </p>
 
 ---
 
-> **💡 灵感来源**: 本项目受 [FARS (Fully Automated Research System)](https://analemma.ai/fars) 启发，是一个使用 LangChain 1.0+ 和 LangGraph 构建的轻量级 AI 研究自动化系统。
+## 📖 项目介绍
+
+LightFARS 是一个**完全自动化**的 AI 研究助手。只需输入你想研究的方向，它就会：
+
+1. 🔍 在 arXiv 上搜索相关论文
+2. 💡 分析文献并生成研究假设
+3. 📋 设计实验并生成代码
+4. 🧪 执行实验并分析数据
+5. ✍️ 撰写完整的研究论文
+
+**整个过程完全自动化，无需人工干预！**
 
 ---
 
-## 📖 项目简介
+## ✨ 为什么选择 LightFARS？
 
-**LightFARS** 是一个端到端的 AI 研究系统，能够自动完成从文献检索到论文撰写的完整研究流程：
-
-| Agent | 功能 |
-|-------|------|
-| 💡 **Ideation Agent** | 文献搜索、假设生成、研究提案 |
-| 📋 **Planning Agent** | 任务分解、实验设计、JSON 计划 |
-| 🧪 **Experiment Agent** | 代码生成、实验执行、数据分析 |
-| ✍️ **Writing Agent** | 论文撰写、Markdown/LaTeX 输出 |
-
-### 🎯 核心特性
-
-- ✅ **LangChain 1.0+ 原生**: 使用最新 LangChain API 构建
-- ✅ **LangGraph 工作流**: StateGraph 状态机编排多 Agent 协作
-- ✅ **ReAct Agent**: 推理+行动的智能代理
-- ✅ **多 LLM 支持**: OpenAI / DeepSeek / Anthropic / Qwen
-- ✅ **Web 界面**: Streamlit 可视化操作
-- ✅ **一键启动**: 命令行交互式启动器
-- ✅ **完全中文化**: 所有 Prompt 和输出支持中文
-
-### 🔄 工作流程
-
-```
-[输入研究方向]
-       ↓
-┌──────────────┐
-│  Ideation    │ → 文献搜索 → 假设生成 → 研究提案
-└──────────────┘
-       ↓
-┌──────────────┐
-│  Planning    │ → 任务分解 → 实验设计 → JSON计划
-└──────────────┘
-       ↓
-┌──────────────┐
-│  Experiment  │ → 代码生成 → 实验执行 → 数据分析
-└──────────────┘
-       ↓
-┌──────────────┐
-│  Writing     │ → 论文撰写 → 格式转换 → 最终输出
-└──────────────┘
-       ↓
-[完整研究论文]
-```
+| 特性 | LightFARS | 其他工具 |
+|------|-----------|----------|
+| **端到端自动化** | ✅ 从文献到论文全流程 | ❌ 通常只能做一部分 |
+| **多 Agent 协作** | ✅ 4 个专业 Agent 配合 | ❌ 单一模型处理 |
+| **可视化界面** | ✅ Web UI + CLI 双模式 | ❌ 只有命令行 |
+| **多 LLM 支持** | ✅ DeepSeek/OpenAI/Anthropic | ❌ 通常只支持一种 |
+| **完全开源** | ✅ MIT 协议，可商用 | ❌ 可能有使用限制 |
+| **学习友好** | ✅ 代码清晰，注释完整 | ❌ 复杂难懂 |
 
 ---
 
 ## 🚀 快速开始
 
-### 1️⃣ 安装依赖
+### 第一步：克隆项目
 
 ```bash
-# 克隆项目
-git clone https://github.com/你的用户名/lightfars.git
-cd lightfars
+git clone https://github.com/110376/LightFARS-AI-Research.git
+cd LightFARS-AI-Research
+```
 
-# 安装依赖
+### 第二步：安装依赖
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2️⃣ 配置 API
+### 第三步：配置 API Key
 
-复制 `config/.env.example` 为 `config/.env`，填入你的 API Key：
+创建 `config/.env` 文件：
 
 ```bash
-# 使用 DeepSeek（推荐，便宜）
+# 推荐 DeepSeek（便宜好用）
 LLM_PROVIDER=openai
-LLM_API_KEY=sk-your-deepseek-key
+LLM_API_KEY=你的DeepSeek-Key
 LLM_BASE_URL=https://api.deepseek.com/v1
 LLM_MODEL_ID=deepseek-chat
-
-# 或使用 OpenAI
-# LLM_PROVIDER=openai
-# LLM_API_KEY=sk-your-openai-key
-# LLM_BASE_URL=https://api.openai.com/v1
-# LLM_MODEL_ID=gpt-4o
 ```
 
-### 3️⃣ 开始使用
+> 💡 **提示**：DeepSeek 价格约为 ¥1/百万 token，运行一次完整研究只需几毛钱！
 
-#### 🌟 方式一：Web 界面（推荐）
+### 第四步：开始研究
+
+#### 🌐 方式一：Web 界面
 
 ```bash
 streamlit run web_app.py
 ```
 
-浏览器访问 `http://localhost:8501`
+打开浏览器访问 `http://localhost:8501`
 
-#### ⚡ 方式二：交互式命令
-
-```bash
-python start.py -i
-```
-
-#### 📝 方式三：直接指定主题
-
-```bash
-python start.py -t "AI 在教育领域的应用"
-```
-
----
-
-## 🎨 使用方式
-
-### Web 界面
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│         🔬 LightFARS - 全自动研究系统                         │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  📝 研究主题                                                 │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │ [AI 教育应用 ▼]                                    │   │
-│  │                                                     │   │
-│  │ 探索人工智能在教育领域的应用...                      │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                                                             │
-│  🚀 开始研究                                                 │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              🔥 开始研究                            │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### 命令行启动器
+#### ⚡ 方式二：命令行
 
 ```bash
 # 交互式模式
 python start.py -i
 
-# 直接指定主题和项目名
-python start.py -p 我的研究 -t "大模型在医疗诊断中的应用"
-
-# 查看帮助
-python start.py --help
+# 直接指定主题
+python start.py -t "大模型在医疗诊断中的应用"
 ```
 
 ---
 
-## 📁 项目结构
+## 🎬 演示效果
+
+### 输入
 
 ```
-lightfars/
-├── config/                 # 配置文件
-│   ├── .env.example       # 环境变量模板
-│   └── settings.py        # 配置加载器
-│
-├── src/                   # 源代码
-│   ├── agents/           # Agent 实现
-│   │   ├── ideation.py   # 构思 Agent
-│   │   ├── planning.py   # 规划 Agent
-│   │   ├── experiment.py # 实验 Agent
-│   │   ├── writing.py    # 写作 Agent
-│   │   └── news_summarizer.py  # 自定义 Agent 示例
-│   │
-│   ├── tools/            # 工具定义
-│   │   ├── literature.py # arXiv 文献搜索
-│   │   └── file_ops.py   # 文件操作工具
-│   │
-│   ├── prompts/          # Prompt 模板
-│   │   └── templates.py  # 所有 Agent 的提示词
-│   │
-│   ├── workflows/        # LangGraph 工作流
-│   │   └── research_flow.py  # 研究流程状态机
-│   │
-│   └── utils/            # 工具函数
-│       └── llm.py        # LLM 初始化
-│
-├── projects/             # 研究项目目录
-│   ├── prompt-engineering-research/  # 示例项目
-│   └── news-reports/     # 新闻报告示例
-│
-├── start.py              # 简易启动器
-├── web_app.py            # Web 界面
-├── main.py               # 主入口
-└── requirements.txt      # 依赖列表
+研究方向：探索不同 Prompt 策略对 LLM 代码生成质量的影响
 ```
 
----
-
-## 📊 输出结果
-
-运行完成后，项目目录包含：
+### 输出
 
 ```
 projects/你的研究/
 ├── idea/
-│   ├── proposal.md          # 研究提案 (10-15页)
-│   └── plan.json            # 研究计划
-│
+│   ├── proposal.md          # 15页研究提案
+│   └── plan.json            # 结构化研究计划
 ├── exp/
-│   ├── task_plan.json       # 实验任务
-│   ├── results/             # 实验结果
+│   ├── task_plan.json       # 实验任务分解
+│   ├── results/             # 实验数据
 │   ├── figures/             # 可视化图表
-│   └── analysis.md          # 分析报告
-│
+│   └── analysis.md          # 数据分析报告
 └── paper/final/
-    ├── report.md            # Markdown 报告
-    └── paper.tex            # LaTeX 论文
+    ├── report.md            # 完整论文
+    └── paper.tex            # LaTeX 格式
+```
+
+### 生成的论文片段
+
+```
+# 研究提案：Prompt工程策略对代码生成质量的影响
+
+## 1. 研究背景
+
+大型语言模型（LLMs）在代码生成任务上取得了显著进展...
+（自动生成的15页学术论文）
 ```
 
 ---
 
-## 🧪 自定义 Agent
+## 🏗️ 核心架构
 
-参考 `src/agents/news_summarizer.py` 创建自己的 Agent：
+LightFARS 采用 **多 Agent 协作 + LangGraph 工作流** 架构：
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    LangGraph 状态机                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   研究方向                                                   │
+│      │                                                      │
+│      ▼                                                      │
+│  ┌─────────┐   ┌─────────┐   ┌─────────┐   ┌─────────┐     │
+│  │ Ideation│──▶│ Planning│──▶│Experiment│──▶│ Writing │     │
+│  │  Agent  │   │  Agent  │   │  Agent  │   │  Agent  │     │
+│  │         │   │         │   │         │   │         │     │
+│  │ 💡文献  │   │ 📋任务  │   │ 🧪实验  │   │ ✍️论文  │     │
+│  │   搜索  │   │   分解  │   │   执行  │   │   撰写  │     │
+│  └─────────┘   └─────────┘   └─────────┘   └─────────┘     │
+│      │             │              │             │           │
+│      ▼             ▼              ▼             ▼           │
+│  proposal.md   task_plan.json   results/     report.md      │
+│  plan.json                   analysis.md   paper.tex        │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 技术栈
+
+| 组件 | 技术 | 用途 |
+|------|------|------|
+| LLM 框架 | LangChain 1.0+ | Agent 和工具管理 |
+| 工作流 | LangGraph 0.2+ | 多 Agent 编排 |
+| Web 界面 | Streamlit | 可视化操作 |
+| 文献搜索 | arXiv API | 论文检索 |
+
+---
+
+## 🧪 自定义开发
+
+### 创建自己的 Agent
 
 ```python
+# src/agents/my_agent.py
+
 from langchain_core.tools import tool
 from langgraph.prebuilt import create_react_agent
 from src.utils.llm import get_llm
 
 @tool
-def my_tool(param: str) -> str:
-    """工具描述"""
-    return f"结果: {param}"
+def my_custom_tool(query: str) -> str:
+    """自定义工具"""
+    return f"处理结果: {query}"
 
-MY_SYSTEM_PROMPT = """你是一位 [角色]...
-你的能力：...
-你的工作流程：1. ... 2. ... 3. ...
+MY_PROMPT = """你是一位专业的...专家。
+
+你的工作流程：
+1. 使用 my_custom_tool 工具
+2. 分析结果
+3. 生成报告
 """
 
 def create_my_agent():
     llm = get_llm()
-    tools = [my_tool, ...]
-    llm_with_system = llm.bind(system=MY_SYSTEM_PROMPT)
-    return create_react_agent(llm_with_system, tools)
+    tools = [my_custom_tool]
+    llm_with_prompt = llm.bind(system=MY_PROMPT)
+    return create_react_agent(llm_with_prompt, tools)
+```
+
+### 项目结构
+
+```
+LightFARS-AI-Research/
+├── src/
+│   ├── agents/          # 4个研究 Agent
+│   ├── tools/           # 工具定义
+│   ├── prompts/         # Prompt 模板
+│   ├── workflows/       # LangGraph 工作流
+│   └── utils/           # 工具函数
+├── start.py             # 命令行启动器
+├── web_app.py           # Web 界面
+└── config/.env          # API 配置
 ```
 
 ---
 
 ## 📚 学习资源
 
-| 主题 | 文件 |
-|------|------|
-| LangChain 基础 | `src/utils/llm.py`, `src/tools/` |
-| ReAct Agent | `src/agents/ideation.py` |
-| LangGraph 工作流 | `src/workflows/research_flow.py` |
-| Prompt 工程 | `src/prompts/templates.py` |
-| 自定义 Agent | `src/agents/news_summarizer.py` |
+想深入了解 LangChain 和 Agent 开发？推荐按以下顺序学习：
+
+1. **LLM 初始化** → `src/utils/llm.py`
+2. **工具定义** → `src/tools/literature.py`
+3. **ReAct Agent** → `src/agents/ideation.py`
+4. **工作流编排** → `src/workflows/research_flow.py`
+5. **Prompt 工程** → `src/prompts/templates.py`
+
+完整的学习文档请查看 [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
 
 ---
 
-## 🛠️ 技术栈
+## 🛠️ 支持的 LLM
 
-- **Python 3.11+**
-- **LangChain 1.0+** - LLM 应用框架
-- **LangGraph 0.2+** - 工作流编排
-- **Streamlit** - Web 界面
-- **arXiv API** - 文献搜索
-
----
-
-## ⚙️ 配置说明
-
-### 支持的 LLM 提供商
-
-| 提供商 | LLM_PROVIDER | LLM_BASE_URL |
-|--------|-------------|-------------|
-| OpenAI | `openai` | `https://api.openai.com/v1` |
-| DeepSeek | `openai` | `https://api.deepseek.com/v1` |
-| Anthropic | `anthropic` | `https://api.anthropic.com` |
-| 阿里百炼 | `openai` | `https://dashscope.aliyuncs.com/compatible-mode/v1` |
-
-### 环境变量
-
-```bash
-# LLM 配置
-LLM_PROVIDER=openai
-LLM_API_KEY=your-api-key
-LLM_BASE_URL=https://api.openai.com/v1
-LLM_MODEL_ID=gpt-4o
-LLM_TEMPERATURE=0.0
-LLM_MAX_TOKENS=4000
-
-# 搜索 API
-ARXIV_API_ENABLED=true
-ARXIV_MAX_RESULTS=20
-```
+| 提供商 | 价格 | 配置 |
+|--------|------|------|
+| **DeepSeek** ⭐ 推荐 | ¥1/百万token | `base_url=https://api.deepseek.com/v1` |
+| OpenAI GPT-4 | $$ | `base_url=https://api.openai.com/v1` |
+| Anthropic Claude | $$$ | `provider=anthropic` |
+| 阿里百炼 | ¥ | `base_url=https://dashscope.aliyuncs.com/compatible-mode/v1` |
 
 ---
 
-## 🤝 贡献指南
+## 🤝 参与贡献
 
-欢迎提交 Issue 和 Pull Request！
+欢迎贡献代码！请查看 [CONTRIBUTING.md](CONTRIBUTING.md) 了解详情。
 
 1. Fork 本项目
 2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
@@ -322,9 +261,9 @@ ARXIV_MAX_RESULTS=20
 
 ---
 
-## 📄 许可证
+## 📄 开源协议
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
+本项目采用 [MIT](LICENSE) 协议 - 欢迎商用、修改和分发
 
 ---
 
@@ -336,15 +275,14 @@ ARXIV_MAX_RESULTS=20
 
 ---
 
-## 📮 联系方式
+<div align="center">
 
-- 项目主页: [https://github.com/你的用户名/lightfars](https://github.com/你的用户名/lightfars)
-- 问题反馈: [Issues](https://github.com/你的用户名/lightfars/issues)
+  **如果这个项目对你有帮助，请给个 ⭐ Star 支持一下！**
 
----
+  **[项目主页](https://github.com/110376/LightFARS-AI-Research) • [问题反馈](https://github.com/110376/LightFARS-AI-Research/issues)**
 
-<p align="center">
-  <sub>Built with ❤️ by LightFARS Community</sub>
+  <sub>Built with ❤️ by <a href="https://github.com/110376">110376</a></sub>
   <br>
-  <sub>让 AI 研究更简单</sub>
-</p>
+  <sub>让 AI 研究更简单、更高效</sub>
+
+</div>
