@@ -216,6 +216,17 @@ projects/my-research/
         └── paper.tex        # LaTeX paper
 ```
 
+## 📸 Screenshots
+
+### Research Workflow
+![LightFARS Workflow](docs/论文1.png)
+
+### Experiment Results
+![Experiment Results](docs/论文2.png)
+
+### Generated Paper
+![Generated Paper](docs/论文3.png)
+
 ## 🎨 Customization
 
 ### Add New Tools
