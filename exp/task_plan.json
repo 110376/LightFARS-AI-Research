@@ -1,0 +1,125 @@
+{
+  "project_name": "CAPE: Complexity-Adaptive Prompt Engineering for Code Generation",
+  "version": "1.0",
+  "created_date": "2025-01-15",
+  "tasks": {
+    "data_preparation": [
+      {
+        "task_id": "DATA-001",
+        "title": "生成模拟实验数据集",
+        "description": "创建 HumanEval 和 MBPP 的模拟数据集用于实验",
+        "priority": "critical"
+      }
+    ],
+    "baseline_experiments": [
+      {
+        "task_id": "BASE-001",
+        "title": "运行 Zero-shot 基线实验",
+        "description": "使用 Zero-shot 策略在模拟数据上测试",
+        "priority": "critical"
+      },
+      {
+        "task_id": "BASE-002",
+        "title": "运行 Few-shot 基线实验",
+        "description": "使用 Few-shot 策略在模拟数据上测试",
+        "priority": "critical"
+      },
+      {
+        "task_id": "BASE-003",
+        "title": "运行 CoT 基线实验",
+        "description": "使用 Chain-of-Thought 策略在模拟数据上测试",
+        "priority": "critical"
+      }
+    ],
+    "main_experiments": [
+      {
+        "task_id": "MAIN-001",
+        "title": "训练复杂度预测器",
+        "description": "使用 XGBoost 训练任务复杂度预测模型",
+        "priority": "critical"
+      },
+      {
+        "task_id": "MAIN-002",
+        "title": "运行 CAPE 框架实验",
+        "description": "使用 CAPE 自适应策略在模拟数据上测试",
+        "priority": "critical"
+      }
+    ],
+    "analysis": [
+      {
+        "task_id": "ANA-001",
+        "title": "生成可视化图表",
+        "description": "创建性能对比和成本分析图表",
+        "priority": "high"
+      },
+      {
+        "task_id": "ANA-002",
+        "title": "撰写实验分析报告",
+        "description": "生成完整的实验分析文档",
+        "priority": "critical"
+      }
+    ]
+  },
+  "task_status": {
+    "last_updated": "2026-03-05T13:19:28.883423",
+    "overall_progress": 0,
+    "tasks": {
+      "DATA-001": {
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null,
+        "error": null,
+        "output_files": []
+      },
+      "BASE-001": {
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null,
+        "error": null,
+        "output_files": []
+      },
+      "BASE-002": {
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null,
+        "error": null,
+        "output_files": []
+      },
+      "BASE-003": {
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null,
+        "error": null,
+        "output_files": []
+      },
+      "MAIN-001": {
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null,
+        "error": null,
+        "output_files": []
+      },
+      "MAIN-002": {
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null,
+        "error": null,
+        "output_files": []
+      },
+      "ANA-001": {
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null,
+        "error": null,
+        "output_files": []
+      },
+      "ANA-002": {
+        "status": "pending",
+        "started_at": null,
+        "completed_at": null,
+        "error": null,
+        "output_files": []
+      }
+    }
+  }
+}

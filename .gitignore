@@ -1,0 +1,77 @@
+# ============= 环境配置（隐私数据） =============
+config/.env
+*.env
+!.env.example
+
+# ============= Python =============
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ============= 虚拟环境 =============
+.venv/
+venv/
+ENV/
+env/
+
+# ============= IDE / 编辑器 =============
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# ============= 日志文件 =============
+*.log
+logs/
+
+# ============= 缓存 =============
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ============= 系统文件 =============
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ============= 项目特定 =============
+# 实验结果（可选，如果想提交结果可以注释掉这行）
+# exp/results/
+# exp/figures/
+
+# 临时文件
+*.tmp
+*.temp
+*.bak
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# 数据文件（如果有大文件）
+*.pkl
+*.pickle
+*.h5
+*.hdf5

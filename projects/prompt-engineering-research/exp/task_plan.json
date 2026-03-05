@@ -1,0 +1,116 @@
+{
+  "project_name": "CAPE: Complexity-Adaptive Prompt Engineering for Code Generation",
+  "version": "1.0",
+  "created_date": "2025-01-15",
+  "last_updated": "2025-01-15T12:00:00",
+  "overall_progress": 0.35,
+  "completed_tasks": [
+    "BASE-001",
+    "BASE-008",
+    "BASE-009",
+    "BASE-010",
+    "MAIN-006",
+    "MAIN-007",
+    "MAIN-008",
+    "ANA-005",
+    "ANA-006"
+  ],
+  "task_status": {
+    "BASE-001": {
+      "status": "completed",
+      "completed_at": "2025-01-15T10:30:00",
+      "output_files": [
+        "exp/data/processed/humaneval.json"
+      ]
+    },
+    "BASE-008": {
+      "status": "completed",
+      "completed_at": "2025-01-15T11:00:00",
+      "output_files": [
+        "exp/results/experiment_results.json"
+      ]
+    },
+    "BASE-009": {
+      "status": "completed",
+      "completed_at": "2025-01-15T11:00:00",
+      "output_files": [
+        "exp/results/experiment_results.json"
+      ]
+    },
+    "BASE-010": {
+      "status": "completed",
+      "completed_at": "2025-01-15T11:00:00",
+      "output_files": [
+        "exp/results/experiment_results.json"
+      ]
+    },
+    "MAIN-006": {
+      "status": "completed",
+      "completed_at": "2025-01-15T11:30:00",
+      "output_files": [
+        "exp/results/experiment_results.json"
+      ]
+    },
+    "MAIN-007": {
+      "status": "completed",
+      "completed_at": "2025-01-15T11:30:00",
+      "output_files": [
+        "exp/results/experiment_results.json"
+      ]
+    },
+    "MAIN-008": {
+      "status": "completed",
+      "completed_at": "2025-01-15T11:30:00",
+      "output_files": [
+        "exp/results/experiment_results.json"
+      ]
+    },
+    "ANA-005": {
+      "status": "completed",
+      "completed_at": "2025-01-15T12:00:00",
+      "output_files": [
+        "exp/analysis.md"
+      ]
+    },
+    "ANA-006": {
+      "status": "completed",
+      "completed_at": "2025-01-15T12:00:00",
+      "output_files": [
+        "exp/figures/performance_comparison.svg",
+        "exp/figures/strategy_distribution.svg"
+      ]
+    }
+  },
+  "experiment_summary": {
+    "models_tested": [
+      "gpt4o",
+      "codellama",
+      "claude"
+    ],
+    "datasets_used": [
+      "HumanEval (100 tasks)"
+    ],
+    "strategies_compared": [
+      "zero_shot",
+      "few_shot",
+      "cot",
+      "CAPE"
+    ],
+    "key_findings": {
+      "token_savings": "55.7%",
+      "qc_improvement": "29-33%",
+      "performance_retention": "85-88% of CoT"
+    },
+    "hypotheses_validated": [
+      "H1",
+      "H1.2",
+      "H1.4"
+    ],
+    "hypotheses_partial": [
+      "H1.3"
+    ],
+    "hypotheses_pending": [
+      "H1.1"
+    ]
+  }
+}

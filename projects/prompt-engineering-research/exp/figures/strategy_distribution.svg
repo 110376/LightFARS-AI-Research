@@ -1,0 +1,78 @@
+<svg width="700" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="700" height="400" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="350" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">CAPE Strategy Distribution by Complexity</text>
+  <text x="350" y="50" text-anchor="middle" font-size="11" fill="#666">Threshold-based Strategy Selection (T1=0.35, T2=0.65)</text>
+  
+  <!-- Complexity axis -->
+  <line x1="100" y1="320" x2="600" y2="320" stroke="#333" stroke-width="2"/>
+  <text x="350" y="355" text-anchor="middle" font-size="12" fill="#333">Task Complexity</text>
+  
+  <!-- Y-axis -->
+  <line x1="100" y1="80" x2="100" y2="320" stroke="#333" stroke-width="2"/>
+  <text x="40" y="200" text-anchor="middle" font-size="12" fill="#333" transform="rotate(-90, 40, 200)">Strategy</text>
+  
+  <!-- Threshold lines -->
+  <line x1="240" y1="80" x2="240" y2="320" stroke="#FF9800" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="440" y1="80" x2="440" y2="320" stroke="#FF9800" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <text x="240" y="340" text-anchor="middle" font-size="11" fill="#FF9800" font-weight="bold">T1=0.35</text>
+  <text x="440" y="340" text-anchor="middle" font-size="11" fill="#FF9800" font-weight="bold">T2=0.65</text>
+  
+  <!-- Complexity scale -->
+  <text x="100" y="340" text-anchor="middle" font-size="10" fill="#666">0.0</text>
+  <text x="220" y="340" text-anchor="middle" font-size="10" fill="#666">0.35</text>
+  <text x="440" y="340" text-anchor="middle" font-size="10" fill="#666">0.65</text>
+  <text x="600" y="340" text-anchor="middle" font-size="10" fill="#666">1.0</text>
+  
+  <!-- Strategy regions -->
+  <!-- Zero-shot region -->
+  <rect x="100" y="100" width="140" height="60" fill="#4CAF50" opacity="0.3"/>
+  <text x="170" y="135" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">Zero-Shot</text>
+  <text x="170" y="155" text-anchor="middle" font-size="11" fill="#666">32 tasks (32%)</text>
+  <text x="170" y="170" text-anchor="middle" font-size="10" fill="#666">Simple tasks</text>
+  
+  <!-- Few-shot region -->
+  <rect x="240" y="100" width="200" height="60" fill="#2196F3" opacity="0.3"/>
+  <text x="340" y="135" text-anchor="middle" font-size="14" font-weight="bold" fill="#1565C0">Few-Shot</text>
+  <text x="340" y="155" text-anchor="middle" font-size="11" fill="#666">41 tasks (41%)</text>
+  <text x="340" y="170" text-anchor="middle" font-size="10" fill="#666">Medium complexity</text>
+  
+  <!-- CoT region -->
+  <rect x="440" y="100" width="160" height="60" fill="#9C27B0" opacity="0.3"/>
+  <text x="520" y="135" text-anchor="middle" font-size="14" font-weight="bold" fill="#6A1B9A">Chain-of-Thought</text>
+  <text x="520" y="155" text-anchor="middle" font-size="11" fill="#666">27 tasks (27%)</text>
+  <text x="520" y="170" text-anchor="middle" font-size="10" fill="#666">Complex tasks</text>
+  
+  <!-- Distribution bars below -->
+  <text x="350" y="210" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Strategy Usage Distribution</text>
+  
+  <!-- Zero-shot bar -->
+  <rect x="150" y="230" width="96" height="30" fill="#4CAF50" opacity="0.8"/>
+  <text x="198" y="250" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">32%</text>
+  
+  <!-- Few-shot bar -->
+  <rect x="250" y="230" width="123" height="30" fill="#2196F3" opacity="0.8"/>
+  <text x="311.5" y="250" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">41%</text>
+  
+  <!-- CoT bar -->
+  <rect x="377" y="230" width="81" height="30" fill="#9C27B0" opacity="0.8"/>
+  <text x="417.5" y="250" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">27%</text>
+  
+  <!-- Legend -->
+  <rect x="480" y="230" width="15" height="15" fill="#4CAF50" opacity="0.8"/>
+  <text x="500" y="242" font-size="10" fill="#333">Zero-Shot (low complexity)</text>
+  <rect x="480" y="250" width="15" height="15" fill="#2196F3" opacity="0.8"/>
+  <text x="500" y="262" font-size="10" fill="#333">Few-Shot (medium)</text>
+  <rect x="480" y="270" width="15" height="15" fill="#9C27B0" opacity="0.8"/>
+  <text x="500" y="282" font-size="10" fill="#333">CoT (high complexity)</text>
+  
+  <!-- Insights box -->
+  <rect x="100" y="280" width="500" height="90" fill="#fff" stroke="#ddd" stroke-width="1" rx="5"/>
+  <text x="115" y="305" font-size="11" font-weight="bold" fill="#333">Key Insights:</text>
+  <text x="115" y="325" font-size="10" fill="#666">• Most tasks (41%) benefit from Few-Shot prompting</text>
+  <text x="115" y="340" font-size="10" fill="#666">• Only 27% of tasks require expensive CoT reasoning</text>
+  <text x="115" y="355" font-size="10" fill="#666">• 32% of simple tasks efficiently handled by Zero-Shot</text>
+</svg>

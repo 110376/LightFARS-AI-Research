@@ -1,0 +1,376 @@
+{
+  "research_title": "基于任务复杂度的自适应 Prompt 工程框架用于高效代码生成",
+  "research_acronym": "CAPE",
+  "version": "1.0",
+  "created_date": "2026-01-15",
+  "research_objectives": {
+    "primary": "开发一个基于任务复杂度的自适应 Prompt 工程框架，在保持代码生成质量的同时显著降低计算成本",
+    "secondary": [
+      "建立代码任务复杂度与最优 Prompt 策略之间的形式化映射关系",
+      "验证动态自适应机制相比静态策略选择的优势",
+      "评估框架在不同模型家族间的泛化能力",
+      "提供可量化的成本 - 质量权衡决策依据"
+    ]
+  },
+  "research_hypotheses": {
+    "H1": {
+      "statement": "存在一个最优的 Prompt 策略选择函数 f: C → S，能够最大化质量 - 成本比 Q/C",
+      "formalization": "max_f E_{c~C}[Q(f(c), c) / Cost(f(c), c)]",
+      "testable": true
+    },
+    "H1_1": {
+      "statement": "代码任务复杂度可通过多维度特征有效预测",
+      "features": [
+        "结构复杂度",
+        "语义复杂度",
+        "依赖复杂度",
+        "文本复杂度"
+      ],
+      "testable": true
+    },
+    "H1_2": {
+      "statement": "存在复杂度阈值 T₁ 和 T₂，使得不同策略在不同区间内 Q/C 最优",
+      "thresholds": {
+        "zero_shot_range": "complexity < T₁",
+        "few_shot_range": "T₁ ≤ complexity < T₂",
+        "cot_range": "complexity ≥ T₂"
+      },
+      "testable": true
+    },
+    "H1_3": {
+      "statement": "引入动态调整机制可进一步提升 Q/C 比 15% 以上",
+      "expected_improvement": 0.15,
+      "testable": true
+    },
+    "H1_4": {
+      "statement": "最优阈值在不同模型家族间存在系统性差异，但特征重要性排序具有跨模型一致性",
+      "testable": true
+    }
+  },
+  "methodology": {
+    "approach": "混合研究方法（定量实验 + 定性分析）",
+    "phases": [
+      {
+        "phase_id": 1,
+        "name": "复杂度特征工程",
+        "duration_months": 2,
+        "tasks": [
+          "收集 5000+ 代码生成任务",
+          "提取多维度复杂度特征",
+          "构建复杂度标注数据集",
+          "进行特征相关性分析"
+        ],
+        "deliverables": [
+          "复杂度特征数据集",
+          "特征工程报告"
+        ],
+        "datasets": [
+          "HumanEval",
+          "MBPP",
+          "LeetCode-Hard",
+          "自建复杂任务集"
+        ]
+      },
+      {
+        "phase_id": 2,
+        "name": "策略性能基准测试",
+        "duration_months": 2,
+        "tasks": [
+          "在 3 类模型上测试 3 种 Prompt 策略",
+          "收集质量指标（pass@1, pass@10）",
+          "记录 token 消耗量",
+          "计算 Q/C 比值"
+        ],
+        "deliverables": [
+          "策略性能对比报告",
+          "统计显著性分析"
+        ],
+        "models": [
+          "GPT-4o",
+          "CodeLlama-34B",
+          "Claude-3.5"
+        ],
+        "strategies": [
+          "Zero-shot",
+          "Few-shot (5 示例)",
+          "CoT (结构化)"
+        ]
+      },
+      {
+        "phase_id": 3,
+        "name": "自适应模型训练",
+        "duration_months": 2,
+        "tasks": [
+          "训练复杂度预测器（XGBoost）",
+          "通过贝叶斯优化搜索最优阈值 T₁, T₂",
+          "开发动态调整器",
+          "集成 CAPE 原型系统"
+        ],
+        "deliverables": [
+          "CAPE 原型系统",
+          "模型训练日志"
+        ],
+        "algorithms": [
+          "XGBoost",
+          "贝叶斯优化",
+          "自一致性评分"
+        ]
+      },
+      {
+        "phase_id": 4,
+        "name": "跨模型泛化验证",
+        "duration_months": 2,
+        "tasks": [
+          "在额外 5 个模型上验证 CAPE 框架",
+          "分析阈值迁移规律",
+          "建立模型规模与最优阈值映射关系",
+          "撰写研究论文"
+        ],
+        "deliverables": [
+          "泛化性分析报告",
+          "研究论文初稿"
+        ],
+        "additional_models": [
+          "GPT-3.5-turbo",
+          "Llama-3-70B",
+          "Mistral-Large",
+          "Gemini-Pro",
+          "StarCoder2"
+        ]
+      },
+      {
+        "phase_id": 5,
+        "name": "工具包开源与文档完善",
+        "duration_months": 1,
+        "tasks": [
+          "完善 CAPE 工具包代码",
+          "编写技术文档和使用指南",
+          "发布 GitHub 仓库",
+          "准备会议/期刊投稿"
+        ],
+        "deliverables": [
+          "GitHub 仓库",
+          "技术文档",
+          "Prompt 选择指南"
+        ]
+      }
+    ]
+  },
+  "evaluation_metrics": {
+    "quality_metrics": [
+      {
+        "name": "pass@1",
+        "description": "一次生成即通过所有测试用例的概率",
+        "target": "不低于静态 CoT 策略的 95%"
+      },
+      {
+        "name": "pass@10",
+        "description": "10 次生成中至少一次通过的概率",
+        "target": "不低于静态 CoT 策略的 90%"
+      },
+      {
+        "name": "code_executability",
+        "description": "生成代码可执行的比例",
+        "target": "> 85%"
+      },
+      {
+        "name": "maintainability_score",
+        "description": "代码可维护性评分（基于圈复杂度等）",
+        "target": "不低于基线的 90%"
+      }
+    ],
+    "cost_metrics": [
+      {
+        "name": "total_tokens",
+        "description": "输入 + 输出 token 总数",
+        "target": "相比静态 CoT 减少 40-60%"
+      },
+      {
+        "name": "qc_ratio",
+        "description": "质量 - 成本比值（pass@1 / total_tokens）",
+        "target": "相比最优静态策略提升 30% 以上"
+      },
+      {
+        "name": "inference_latency",
+        "description": "平均推理延迟（毫秒）",
+        "target": "不显著增加（< 10%）"
+      }
+    ],
+    "statistical_tests": [
+      {
+        "test": "paired t-test",
+        "alpha": 0.05,
+        "purpose": "检验 CAPE 与基线方法的性能差异显著性"
+      },
+      {
+        "test": "Cohen's d",
+        "purpose": "计算效应量"
+      },
+      {
+        "test": "5-fold cross-validation",
+        "purpose": "评估模型泛化能力"
+      }
+    ]
+  },
+  "baseline_methods": [
+    {
+      "name": "Static-CoT",
+      "description": "统一使用 CoT 策略",
+      "reference": "Wei et al. (2022)"
+    },
+    {
+      "name": "Static-FewShot",
+      "description": "统一使用 Few-shot 策略",
+      "reference": "标准实践"
+    },
+    {
+      "name": "PET-Select",
+      "description": "基于代码复杂度的二分类策略选择",
+      "reference": "Wang et al. (2024)",
+      "arxiv": "2409.16416"
+    },
+    {
+      "name": "RoutingGen",
+      "description": "难度感知动态路由框架",
+      "reference": "Li et al. (2025)",
+      "arxiv": "2512.14048"
+    }
+  ],
+  "expected_outcomes": {
+    "theoretical_contributions": [
+      "复杂度 - 策略映射理论",
+      "动态自适应框架",
+      "成本效益量化模型"
+    ],
+    "practical_contributions": [
+      "CAPE 开源工具包",
+      "Prompt 选择最佳实践指南",
+      "成本优化方案（预期节省 40-60% token）"
+    ],
+    "publications": [
+      {
+        "type": "conference",
+        "target_venues": [
+          "ICSE",
+          "FSE",
+          "ASE",
+          "NeurIPS",
+          "ICLR"
+        ],
+        "timeline": "第 8-9 月投稿"
+      },
+      {
+        "type": "journal",
+        "target_venues": [
+          "TSE",
+          "TOSEM",
+          "JMLR"
+        ],
+        "timeline": "第 10-12 月投稿"
+      }
+    ],
+    "open_source": {
+      "platform": "GitHub",
+      "license": "MIT",
+      "components": [
+        "CAPE 核心库",
+        "复杂度预测模型",
+        "基准测试脚本",
+        "文档"
+      ]
+    }
+  },
+  "risk_assessment": [
+    {
+      "risk": "模型 API 成本过高",
+      "probability": "中",
+      "impact": "高",
+      "mitigation": "优先使用开源模型进行初步实验，申请研究资助"
+    },
+    {
+      "risk": "复杂度特征预测不准确",
+      "probability": "低",
+      "impact": "中",
+      "mitigation": "采用集成学习方法，增加特征维度"
+    },
+    {
+      "risk": "跨模型泛化效果不佳",
+      "probability": "中",
+      "impact": "中",
+      "mitigation": "设计模型特定的阈值校准模块"
+    },
+    {
+      "risk": "动态调整机制引入额外延迟",
+      "probability": "低",
+      "impact": "低",
+      "mitigation": "优化中间结果评估算法，设置超时机制"
+    }
+  ],
+  "timeline": {
+    "total_duration_months": 9,
+    "start_date": "2026-02-01",
+    "end_date": "2026-10-31",
+    "milestones": [
+      {
+        "name": "数据收集完成",
+        "month": 2,
+        "deliverable": "复杂度特征数据集"
+      },
+      {
+        "name": "基准测试完成",
+        "month": 4,
+        "deliverable": "策略性能对比报告"
+      },
+      {
+        "name": "CAPE 原型完成",
+        "month": 6,
+        "deliverable": "CAPE 原型系统"
+      },
+      {
+        "name": "论文初稿完成",
+        "month": 8,
+        "deliverable": "研究论文初稿"
+      },
+      {
+        "name": "工具包发布",
+        "month": 9,
+        "deliverable": "GitHub 仓库"
+      }
+    ]
+  },
+  "resource_requirements": {
+    "computational_resources": {
+      "gpu_hours": 500,
+      "estimated_cost_usd": 2000,
+      "description": "主要用于开源模型微调和复杂度预测器训练"
+    },
+    "api_budget": {
+      "estimated_tokens": 50000000,
+      "estimated_cost_usd": 1500,
+      "description": "用于 GPT-4o、Claude-3.5 等闭源模型的基准测试"
+    },
+    "human_resources": {
+      "researchers": 2,
+      "engineers": 1,
+      "description": "1 名主要研究者 + 1 名合作者 + 1 名工程支持"
+    }
+  },
+  "ethical_considerations": [
+    {
+      "aspect": "数据使用",
+      "consideration": "所有基准数据集均为公开数据集，遵守相应许可协议"
+    },
+    {
+      "aspect": "模型使用",
+      "consideration": "遵守各模型 API 的使用条款，不用于生成恶意代码"
+    },
+    {
+      "aspect": "环境影响",
+      "consideration": "通过成本优化减少不必要的计算资源消耗，符合绿色 AI 理念"
+    },
+    {
+      "aspect": "可复现性",
+      "consideration": "开源代码和数据，确保研究结果可复现"
+    }
+  ]
+}
